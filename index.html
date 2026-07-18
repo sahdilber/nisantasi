@@ -236,14 +236,16 @@ section{padding:clamp(80px,12vh,150px) clamp(18px,4vw,54px);position:relative}
 .member .acts a.bk:hover{background:var(--accent);border-color:var(--accent)}
 .member .acts svg{width:12px;height:12px;fill:currentColor}
 @media(max-width:640px){
-  .team-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .member{padding:20px 12px}
-  .member .mono{width:54px;height:54px;font-size:19px;margin-bottom:12px}
-  .member h3{font-size:16.5px}
-  .member .role{font-size:8.5px;letter-spacing:.12em;margin-top:5px;min-height:22px}
-  .member .acts{margin-top:12px;gap:6px;flex-direction:column;width:100%}
-  .member .acts a{width:100%;justify-content:center;padding:8px 6px;font-size:9px;letter-spacing:.1em}
-  .member .acts svg{width:11px;height:11px}
+  .team-grid{display:block;border-top:1px solid var(--line)}
+  .member{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"m n a" "m r a";column-gap:16px;row-gap:3px;align-items:center;text-align:left;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:16px 2px;background:none;box-shadow:none}
+  .member:hover{transform:none;background:none;box-shadow:none}
+  .member .mono{grid-area:m;width:44px;height:44px;font-size:15px;margin:0}
+  .member h3{grid-area:n;font-size:17.5px;align-self:end}
+  .member .role{grid-area:r;margin:0;min-height:0;font-size:8.5px;letter-spacing:.15em;align-self:start}
+  .member .acts{grid-area:a;margin:0;gap:8px;flex-wrap:nowrap}
+  .member .acts a{width:38px;height:38px;padding:0;justify-content:center;border-radius:50%;flex:none}
+  .member .acts a .t{display:none}
+  .member .acts svg{width:14px;height:14px}
 }
 
 /* ===== REVIEWS ===== */
@@ -973,11 +975,12 @@ var CAT_ICONS=[
     var ig='https://www.instagram.com/'+(m.ig||SALON_IG)+'/';
     var el=document.createElement('div');
     el.className='member reveal'+(i%4?' reveal-d'+(i%4):'');
+    var bkIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="fill:none"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
     el.innerHTML='<div class="mono"><span>'+initials+'</span></div>'
       +'<h3>'+m.name+'</h3><div class="role">'+m.role+'</div>'
       +'<div class="acts">'
-      +'<a href="'+ig+'" target="_blank" rel="noopener">'+igIcon+' Instagram</a>'
-      +'<a class="bk" href="'+BOOKING_URL+'" target="_blank" rel="noopener">Randevu Al</a>'
+      +'<a href="'+ig+'" target="_blank" rel="noopener" aria-label="'+m.name+' Instagram">'+igIcon+'<span class="t">Instagram</span></a>'
+      +'<a class="bk" href="'+BOOKING_URL+'" target="_blank" rel="noopener" aria-label="Randevu al">'+bkIcon+'<span class="t">Randevu Al</span></a>'
       +'</div>';
     grid.appendChild(el);
   });
