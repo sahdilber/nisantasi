@@ -296,12 +296,67 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(66
 .f-bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;letter-spacing:.06em;color:var(--muted)}
 .big-word{font-family:var(--sans);font-weight:200;font-size:clamp(40px,15vw,220px);line-height:.9;text-align:center;letter-spacing:.24em;text-indent:.24em;color:transparent;-webkit-text-stroke:1px rgba(23,20,15,.16);margin:56px 0 40px;user-select:none;white-space:nowrap}
 @media(max-width:640px){.big-word{font-size:11.5vw;letter-spacing:.16em;text-indent:.16em}}
+
+/* ===== AWWWARDS PASS ===== */
+/* scroll progress hairline */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:960;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none}
+
+/* header: yön algılayan gizlenme */
+header{transition:padding .5s var(--ease),background .5s var(--ease),border-color .5s,transform .6s var(--ease)}
+header.away{transform:translateY(-110%)}
+
+/* cursor: bağlamsal etiket */
+.cursor-ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;font-style:normal;color:var(--paper);opacity:0;transition:opacity .25s;text-align:center;line-height:1.3;padding:6px}
+.cursor-ring.label{width:78px;height:78px;background:var(--ink);border-color:var(--ink)}
+.cursor-ring.label b{opacity:1}
+
+/* hero: durum çipi */
+.status{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:40px;padding:8px 16px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-left:12px;vertical-align:middle}
+.status i{width:7px;height:7px;border-radius:50%;background:#7d9f5c;box-shadow:0 0 0 0 rgba(125,159,92,.5);animation:pulse 2.2s infinite}
+.status.closed i{background:#b3543f;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(125,159,92,0)}100%{box-shadow:0 0 0 0 rgba(125,159,92,0)}}
+
+/* hero: dönen rozet */
+.orbit{position:absolute;right:clamp(16px,6vw,84px);bottom:clamp(90px,16vh,150px);width:112px;height:112px;opacity:0;transition:opacity 1.5s var(--ease) 1.9s;pointer-events:none}
+.hero.on .orbit{opacity:.9}
+.orbit svg{width:100%;height:100%;overflow:visible;animation:spin 22s linear infinite}
+.orbit svg text{font-family:var(--sans);font-size:8.6px;letter-spacing:.28em;text-transform:uppercase;fill:var(--muted)}
+.orbit .core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--accent);font-size:20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.orbit{display:none}}
+
+/* imza bandı: koyu perde */
+.sig-dark{background:var(--ink);color:var(--paper)}
+.sig-dark .sig p{color:rgba(246,242,236,.62)}
+.sig-dark .eyebrow{color:var(--accent-2)}
+.sig-dark .eyebrow::before{background:var(--accent-2)}
+.sig-dark .chips span{border-color:rgba(246,242,236,.22);color:rgba(246,242,236,.72)}
+.sig-dark .chips span:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.sig-dark .sig h3 em{color:var(--accent-2)}
+
+/* footer: perde efekti */
+.site-wrap{position:relative;z-index:2;background:var(--paper);box-shadow:0 34px 70px -34px rgba(23,20,15,.5)}
+footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--paper-2)}
+@media(max-width:940px){footer{position:static}body{padding-bottom:0!important}.site-wrap{box-shadow:none}}
+
+/* hareket azaltma tercihi */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .marquee .track{animation:none!important;transform:none!important}
+  .orbit svg{animation:none}
+  .status i{animation:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .hero h1 .ch i{transform:none!important;transition:none!important}
+  .mission h2 .ln span{transform:none!important;transition:none!important}
+  .hero .kuafor,.hero .sub,.hero .orn,.scroll-cue{opacity:1!important;transform:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
 <div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+<div class="cursor-ring"><b id="curLabel"></b></div>
+<div class="progress" id="progress"></div>
 
 <div class="loader" id="loader">
   <div class="wordmark">NİŞANTAŞI<small>KUAFÖR</small></div>
@@ -333,10 +388,12 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(66
   <a href="https://www.kolayrandevu.com/reserve.php?salon=83792&amp;greserve=1&amp;utm_source=google&amp;utm_medium=reserve_with_google&amp;utm_content=action_url&amp;rwg_token=AE37R_gm430iYFOPQTcPUqKC_ukrrk_4SPtK-JW-sKgx8Wd3HccY3JXRKwoGhBhDsCqLMIChuDoWkWkm35Vd_MlCwoAmWV3MXQ%3D%3D" target="_blank" rel="noopener">Randevu Al</a>
 </div>
 
+<main class="site-wrap">
+
 <!-- HERO — sadece tipografi -->
 <section class="hero" id="hero">
   <span class="orn o1">✦</span><span class="orn o2">✦</span><span class="orn o3">✦</span><span class="orn o4">✦</span>
-  <div class="kick"><span class="eyebrow">Mersin · Since 2018</span></div>
+  <div class="kick"><span class="eyebrow">Mersin · Since 2018</span><span class="status" id="statusChip" style="display:none"><i></i><span id="statusTxt">—</span></span></div>
   <h1 id="heroTitle"><span class="word">NİŞANTAŞI</span></h1>
   <div class="kuafor">Kuaför</div>
   <div class="sub">
@@ -345,6 +402,10 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(66
     <span>Pazar günleri <b>açığız</b></span>
   </div>
   <div class="scroll-cue"><span>Keşfet</span><i></i></div>
+  <div class="orbit">
+    <svg viewBox="0 0 100 100"><defs><path id="orbitPath" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs><text><textPath href="#orbitPath">Hair Design Studio · Since 2018 · Mersin&#160;·&#160;</textPath></text></svg>
+    <span class="core">✦</span>
+  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -396,7 +457,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(66
 </section>
 
 <!-- SIGNATURE -->
-<section id="signature">
+<section id="signature" class="sig-dark">
   <div class="sig">
     <span class="eyebrow reveal">İmza Tekniği</span>
     <h3 class="reveal reveal-d1">Free<em>light</em>.</h3>
@@ -490,6 +551,8 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(66
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -656,7 +719,7 @@ var MENU = [
   var bar=document.getElementById('loadBar'),pct=document.getElementById('loadPct'),loader=document.getElementById('loader');
   var p=0;var t=setInterval(function(){p+=Math.random()*16;if(p>=100){p=100;clearInterval(t);
     setTimeout(function(){loader.classList.add('done');document.getElementById('hero').classList.add('on');},450);}
-    bar.style.transform='scaleX('+(p/100)+')';pct.textContent=('0'+Math.floor(p)).slice(-2);},130);
+    bar.style.transform='scaleX('+(p/100)+')';pct.textContent=String(Math.floor(p)).padStart(2,'0');},130);
 })();
 
 /* ================= HERO harf animasyonu ================= */
@@ -792,6 +855,126 @@ document.querySelectorAll('.reveal, #missionTitle').forEach(function(el){io.obse
       bw.style.transform='translateX('+((p-.5)*60)+'px)';
     }
   },{passive:true});
+})();
+
+/* ================= AWWWARDS KATMANI ================= */
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var TOUCH=window.matchMedia&&matchMedia('(hover: none)').matches;
+
+/* kaydırma ilerleme çizgisi */
+(function(){
+  var bar=document.getElementById('progress');if(!bar)return;
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.transform='scaleX('+(h>0?window.scrollY/h:0)+')';
+  },{passive:true});
+})();
+
+/* header: aşağı inerken gizlen, yukarı çıkarken görün */
+(function(){
+  var last=0;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(y>160&&y>last+6)header.classList.add('away');
+    else if(y<last-6||y<160)header.classList.remove('away');
+    last=y;
+  },{passive:true});
+})();
+
+/* hero paralaks: başlık yukarı süzülüp erir */
+(function(){
+  if(RM)return;
+  var t=document.getElementById('heroTitle'),k=document.querySelector('.hero .kick'),cue=document.querySelector('.scroll-cue');
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY,vh=window.innerHeight;
+    if(y>vh){return}
+    var p=y/vh;
+    t.style.transform='translateY('+(y*.3)+'px)';
+    t.style.opacity=Math.max(0,1-p*1.3);
+    k.style.opacity=Math.max(0,1-p*1.8);
+    if(cue)cue.style.opacity=Math.max(0,1-p*3);
+  },{passive:true});
+})();
+
+/* marquee: kaydırma hızına tepki verir */
+(function(){
+  if(RM)return;
+  var track=document.querySelector('.marquee .track');if(!track)return;
+  track.style.animation='none';
+  var x=0,vel=0,last=window.scrollY;
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel+=(y-last)*.05;last=y;},{passive:true});
+  (function loop(){
+    vel*=.9;
+    x-=1.1+Math.max(-5,Math.min(5,vel));
+    var w=track.scrollWidth/2;
+    if(w>0){if(x<=-w)x+=w;if(x>0)x-=w;}
+    track.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* manyetik butonlar */
+(function(){
+  if(RM||TOUCH)return;
+  document.querySelectorAll('.nav-cta,.btn,.wa-cta').forEach(function(el){
+    el.addEventListener('mousemove',function(e){
+      var r=el.getBoundingClientRect();
+      var dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
+      el.style.transform='translate('+(dx*.22)+'px,'+(dy*.32)+'px)';
+    });
+    el.addEventListener('mouseleave',function(){el.style.transform='';});
+  });
+})();
+
+/* imleç etiketi: satır bağlamına göre */
+(function(){
+  if(TOUCH)return;
+  document.querySelectorAll('#catList .svc').forEach(function(a){a.setAttribute('data-cursor','Randevu →')});
+  document.querySelectorAll('#prodList .prod').forEach(function(a){a.setAttribute('data-cursor','Katalog ↗')});
+  var ring=document.querySelector('.cursor-ring'),lb=document.getElementById('curLabel');
+  document.addEventListener('mouseover',function(e){
+    var t=e.target.closest&&e.target.closest('[data-cursor]');
+    if(t){ring.classList.add('label');lb.textContent=t.getAttribute('data-cursor');}
+    else{ring.classList.remove('label');lb.textContent='';}
+  });
+})();
+
+/* yorum kartları: 3B eğilme */
+(function(){
+  if(RM||TOUCH)return;
+  document.querySelectorAll('#revGrid .rev').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var rx=((e.clientY-r.top)/r.height-.5)*-5,ry=((e.clientX-r.left)/r.width-.5)*5;
+      card.style.transform='translateY(-5px) perspective(700px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    });
+    card.addEventListener('mouseleave',function(){card.style.transform='';});
+  });
+})();
+
+/* footer perde efekti: gövdeye footer yüksekliği kadar boşluk */
+(function(){
+  var f=document.querySelector('footer');if(!f)return;
+  function fit(){
+    if(window.innerWidth<=940){document.body.style.paddingBottom='';return}
+    document.body.style.paddingBottom=f.offsetHeight+'px';
+  }
+  fit();window.addEventListener('resize',fit);setTimeout(fit,900);
+})();
+
+/* canlı açık/kapalı durumu (Salı kapalı · Pazar 10–16 · diğer günler 09–20) */
+(function(){
+  var chip=document.getElementById('statusChip'),txt=document.getElementById('statusTxt');if(!chip)return;
+  try{
+    var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Istanbul'}));
+    var day=now.getDay(),h=now.getHours()+now.getMinutes()/60,open;
+    if(day===2)open=false;
+    else if(day===0)open=(h>=10&&h<16);
+    else open=(h>=9&&h<20);
+    txt.textContent=open?'Şu an açığız':(day===2?'Bugün kapalıyız':'Şu an kapalıyız');
+    chip.classList.toggle('closed',!open);
+    chip.style.display='inline-flex';
+  }catch(e){}
 })();
 
 window._bindCursor&&window._bindCursor();
