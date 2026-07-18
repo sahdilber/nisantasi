@@ -347,7 +347,6 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 
 /* hero: zanaat aletleri (çizgisel) */
 .tool{position:absolute;fill:none;stroke:var(--ink-soft);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;opacity:.14;pointer-events:none}
-.tool.t-comb{top:19%;left:7%;width:clamp(56px,7vw,108px);rotate:-14deg}
 .tool.t-spray{top:57%;right:6.5%;width:clamp(34px,4vw,58px);rotate:10deg}
 
 /* hizmet kategorisi ikonları */
@@ -358,24 +357,18 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 .cat.open .cicon{color:var(--accent);transform:rotate(-8deg) scale(1.08)}
 .cat-head .t{align-items:center}
 
-/* koyu bant: tarak dişi kenarlar */
 .sig-dark{position:relative}
-.sig-dark::before,.sig-dark::after{content:"";position:absolute;left:0;right:0;height:9px;background:repeating-linear-gradient(90deg,var(--paper) 0 5px,transparent 5px 14px)}
-.sig-dark::before{top:0}
-.sig-dark::after{bottom:0;background:repeating-linear-gradient(90deg,var(--paper-2) 0 5px,transparent 5px 14px)}
 
 /* ===== SEPET & ÖDEME ===== */
-.cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);border-radius:40px;padding:10px 16px;font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);cursor:none;transition:background .4s,color .4s,border-color .4s}
-.cart-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.cart-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.cart-btn .cnt{position:absolute;top:-7px;right:-7px;min-width:18px;height:18px;border-radius:10px;background:var(--accent);color:var(--paper);font-size:10px;letter-spacing:0;display:flex;align-items:center;justify-content:center;padding:0 5px;transform:scale(0);transition:transform .35s var(--ease)}
+.cart-btn{position:relative;width:42px;height:42px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:50%;color:var(--ink);cursor:none;transition:background .4s,color .4s,border-color .4s,transform .5s var(--ease)}
+.cart-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
+.cart-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cart-btn .cnt{position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;border-radius:10px;background:var(--accent);color:var(--paper);font-size:9.5px;font-family:var(--sans);display:flex;align-items:center;justify-content:center;padding:0 4px;transform:scale(0);transition:transform .35s var(--ease)}
 .cart-btn.has .cnt{transform:scale(1)}
 .cart-btn.bump{animation:cbump .4s var(--ease)}
 @keyframes cbump{0%,100%{transform:none}40%{transform:translateY(-3px)}}
 @media(max-width:940px){
   .nav-r{padding-right:44px}
-  .cart-btn .lbl{display:none}
-  .cart-btn{padding:9px 11px}
   header .wordmark{font-size:14px;letter-spacing:.34em;text-indent:.34em}
   header .wordmark small{font-size:7.5px;letter-spacing:.3em;text-indent:.3em;margin-top:4px}
 }
@@ -393,6 +386,11 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 .d-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--line)}
 .d-head h3{font-family:var(--serif);font-size:26px;font-weight:400}
 .d-head h3 i{font-style:italic;color:var(--accent)}
+.d-cnt{font-family:var(--sans);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-left:10px;vertical-align:middle}
+.d-item .unit{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.03em}
+.d-sav{display:flex;justify-content:space-between;font-size:12px;color:var(--accent);margin-bottom:10px;letter-spacing:.02em}
+.d-cont{display:block;width:100%;text-align:center;margin-top:12px;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:none;transition:color .3s;padding:6px}
+.d-cont:hover{color:var(--ink)}
 .d-x{background:none;border:none;font-size:20px;color:var(--ink);cursor:none;line-height:1;padding:8px;transition:color .3s,transform .4s var(--ease)}
 .d-x:hover{color:var(--accent);transform:rotate(90deg)}
 .d-body{flex:1;overflow-y:auto;padding:6px 26px}
@@ -474,7 +472,7 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
     <a href="#ekip" class="lnk">Ekip</a>
     <a href="#yorumlar" class="lnk">Yorumlar</a>
     <a href="https://www.kolayrandevu.com/reserve.php?salon=83792&amp;greserve=1&amp;utm_source=google&amp;utm_medium=reserve_with_google&amp;utm_content=action_url&amp;rwg_token=AE37R_gm430iYFOPQTcPUqKC_ukrrk_4SPtK-JW-sKgx8Wd3HccY3JXRKwoGhBhDsCqLMIChuDoWkWkm35Vd_MlCwoAmWV3MXQ%3D%3D" target="_blank" rel="noopener" class="lnk nav-cta">Randevu Al</a>
-    <button class="cart-btn" id="cartBtn" aria-label="Sepeti aç"><svg viewBox="0 0 24 24"><path d="M6 8 h12 l-1.2 12 a2 2 0 0 1 -2 1.8 h-5.6 a2 2 0 0 1 -2 -1.8 Z M9 8 V6.4 a3 3 0 0 1 6 0 V8"/></svg><span class="lbl">Sepet</span><span class="cnt" id="cartCnt">0</span></button>
+    <button class="cart-btn" id="cartBtn" aria-label="Sepeti aç"><svg viewBox="0 0 24 24"><path d="M6 8 h12 l-1.2 12 a2 2 0 0 1 -2 1.8 h-5.6 a2 2 0 0 1 -2 -1.8 Z M9 8 V6.4 a3 3 0 0 1 6 0 V8"/></svg><span class="cnt" id="cartCnt">0</span></button>
   </div>
   <div class="burger" id="burger"><span></span><span></span><span></span></div>
 </header>
@@ -493,7 +491,6 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <!-- HERO — sadece tipografi -->
 <section class="hero" id="hero">
   <span class="orn o1">✦</span><span class="orn o2">✦</span><span class="orn o3">✦</span><span class="orn o4">✦</span>
-  <svg class="tool t-comb" data-k="14" viewBox="0 0 64 26"><path d="M3 5 H61 M7 5 V21 M13.5 5 V21 M20 5 V21 M26.5 5 V21 M33 5 V21 M39.5 5 V21 M46 5 V21 M52.5 5 V21 M59 5 V21"/></svg>
   <svg class="tool t-spray" data-k="22" viewBox="0 0 40 58"><path d="M10 24 h20 v26 a4 4 0 0 1 -4 4 h-12 a4 4 0 0 1 -4 -4 Z M14 24 v-6 h8 v6 M14 18 v-5 h12 M26 13 h5 M34 9 l4 -3 M35 13 h5 M34 17 l4 3"/></svg>
   <div class="kick"><span class="eyebrow">Mersin · Since 2018</span><span class="status" id="statusChip" style="display:none"><i></i><span id="statusTxt">—</span></span></div>
   <h1 id="heroTitle"><span class="word">NİŞANTAŞI</span></h1>
@@ -696,12 +693,14 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <!-- SEPET ÇEKMECESİ -->
 <div class="veil" id="veil"></div>
 <aside class="drawer" id="drawer" aria-label="Sepet">
-  <div class="d-head"><h3>Sepet<i>.</i></h3><button class="d-x" id="dClose" aria-label="Kapat">✕</button></div>
+  <div class="d-head"><h3>Sepet<i>.</i><span class="d-cnt" id="dCount"></span></h3><button class="d-x" id="dClose" aria-label="Kapat">✕</button></div>
   <div class="d-body" id="dBody"></div>
   <div class="d-foot" id="dFoot">
+    <div class="d-sav" id="dSav" style="display:none"><span>Liste fiyatına göre kazancınız</span><span id="dSavVal"></span></div>
     <div class="d-tot"><span>Toplam</span><span id="dTotal">₺0</span></div>
     <p class="d-note">Fiyatlar stüdyo satış fiyatıdır. Sipariş WhatsApp üzerinden onaylanır — kart bilgisi istenmez.</p>
     <button class="btn d-cta" id="goCheckout">Ödemeye Geç →</button>
+    <button class="d-cont" id="dCont">← Alışverişe Devam</button>
   </div>
 </aside>
 
@@ -911,7 +910,7 @@ mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',functi
 
 /* ================= HİZMET MENÜSÜ ================= */
 var CAT_ICONS=[
-  '<svg viewBox="0 0 26 26"><path d="M4 6 H22 M7 6 V20 M11 6 V20 M15 6 V20 M19 6 V20"/></svg>',
+  '<svg viewBox="0 0 26 26"><path d="M3 8c4-4 7 4 11 0s6-2 9 0M3 14c4-4 7 4 11 0s6-2 9 0M3 20c4-4 7 4 11 0s6-2 9 0"/></svg>',
   '<svg viewBox="0 0 24 24"><path d="M12 3C12 3 5.5 11 5.5 15.2a6.5 6.5 0 0 0 13 0C18.5 11 12 3 12 3Z"/></svg>',
   '<svg viewBox="0 0 26 30"><path d="M9 12 h8 v13 a3.4 3.4 0 0 1 -3.4 3.4 h-1.2 A3.4 3.4 0 0 1 9 25 Z M10.4 12 V7.4 h5.2 V12 M11.6 7.4 V4 h2.8 v3.4"/></svg>',
   '<svg viewBox="0 0 24 24"><path d="M4.5 19.5 12 12 M12.8 11.2 l5.4 -5.4 a2 2 0 0 0 -2.8 -2.8 l-5.4 5.4 M9.2 9.2 l5.6 5.6"/></svg>'
@@ -951,7 +950,7 @@ var CAT_ICONS=[
         +'<div><span class="brand">'+p[0]+'</span><span class="name">'+p[1]+'</span><span class="pdesc">'+p[5]+'</span></div>'
         +'<span class="ptype">'+p[2]+'</span>'
         +'<span class="price">'+p[3]+'<span class="old">'+p[4]+'</span></span>'
-        +'<button class="padd" type="button" data-n="'+p[1]+'" data-b="'+p[0]+'" data-p="'+parseInt(p[3].replace(/\D/g,''),10)+'">Sepete Ekle +</button>';
+        +'<button class="padd" type="button" data-n="'+p[1]+'" data-b="'+p[0]+'" data-p="'+parseInt(p[3].replace(/\D/g,''),10)+'" data-o="'+parseInt(p[4].replace(/\D/g,''),10)+'">Sepete Ekle +</button>';
       wrap.appendChild(row);
     });
   });
@@ -1017,18 +1016,24 @@ var WA_ORDER='905312046564';
   function badge(){var c=count();cnt.textContent=c;btn.classList.toggle('has',c>0);
     btn.classList.remove('bump');void btn.offsetWidth;if(c)btn.classList.add('bump');}
 
+  function savings(){var s=0;cart.forEach(function(i){if(i.o&&i.o>i.p)s+=i.q*(i.o-i.p)});return s}
   function renderDrawer(){
-    if(!cart.length){dBody.innerHTML='<div class="d-empty">Sepetiniz henüz boş.<br>Ürünler bölümünden stüdyo bakımını evinize taşıyın ✦</div>';dFoot.style.display='none';return}
+    var dc=document.getElementById('dCount');
+    if(dc)dc.textContent=cart.length?count()+' ürün':'';
+    if(!cart.length){dBody.innerHTML='<div class="d-empty">✦<br><br>Sepetiniz henüz boş.<br>Ürünler bölümünden stüdyo bakımını evinize taşıyın.</div>';dFoot.style.display='none';return}
     dFoot.style.display='';
     var h='';
     cart.forEach(function(it,i){
       h+='<div class="d-item"><div><span class="br">'+it.b+'</span><div class="nm">'+it.n+'</div>'
+        +'<div class="unit">'+fmt(it.p)+' · adet</div>'
         +'<div class="d-ops"><span class="qty"><button data-i="'+i+'" data-d="-1">−</button><span>'+it.q+'</span><button data-i="'+i+'" data-d="1">+</button></span>'
         +'<button class="rm" data-i="'+i+'">Kaldır</button></div></div>'
         +'<span class="pr">'+fmt(it.q*it.p)+'</span></div>';
     });
     dBody.innerHTML=h;
     dTotal.textContent=fmt(total());
+    var sv=savings(),svRow=document.getElementById('dSav');
+    if(svRow){svRow.style.display=sv>0?'':'none';if(sv>0)document.getElementById('dSavVal').textContent='−'+fmt(sv)}
     dBody.querySelectorAll('.qty button').forEach(function(b){
       b.addEventListener('click',function(){
         var i=+b.getAttribute('data-i'),d=+b.getAttribute('data-d');
@@ -1047,15 +1052,16 @@ var WA_ORDER='905312046564';
   function closeAll(){veil.classList.remove('on');drawer.classList.remove('on');checkout.classList.remove('on');lock(false)}
   btn.addEventListener('click',openDrawer);
   document.getElementById('dClose').addEventListener('click',closeAll);
+  document.getElementById('dCont').addEventListener('click',closeAll);
   veil.addEventListener('click',closeAll);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll()});
 
   /* sepete ekle butonları */
   document.querySelectorAll('.padd').forEach(function(b){
     b.addEventListener('click',function(){
-      var n=b.getAttribute('data-n'),br=b.getAttribute('data-b'),p=+b.getAttribute('data-p');
+      var n=b.getAttribute('data-n'),br=b.getAttribute('data-b'),p=+b.getAttribute('data-p'),o=+b.getAttribute('data-o')||0;
       var f=null;cart.forEach(function(i){if(i.n===n)f=i});
-      if(f)f.q++;else cart.push({n:n,b:br,p:p,q:1});
+      if(f)f.q++;else cart.push({n:n,b:br,p:p,o:o,q:1});
       save();badge();
       var t=b.textContent;b.classList.add('ok');b.textContent='Eklendi ✓';
       setTimeout(function(){b.classList.remove('ok');b.textContent=t},1300);
@@ -1067,6 +1073,8 @@ var WA_ORDER='905312046564';
     var h='';cart.forEach(function(it){
       h+='<div class="co-line"><span>'+it.n+' <span class="q">× '+it.q+'</span></span><span>'+fmt(it.q*it.p)+'</span></div>';
     });
+    var sv=savings();
+    if(sv>0)h+='<div class="co-line" style="color:var(--accent)"><span>Liste fiyatına göre kazancınız</span><span>−'+fmt(sv)+'</span></div>';
     document.getElementById('coItems').innerHTML=h;
     document.getElementById('coTotal').textContent=fmt(total());
   }
