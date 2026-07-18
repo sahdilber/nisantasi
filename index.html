@@ -34,7 +34,7 @@ button{font-family:var(--sans)}
 body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* cursor */
-.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor-dot,.cursor-ring{position:fixed;top:-100px;left:-100px;z-index:9999;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
 .cursor-dot{width:5px;height:5px;background:var(--ink)}
 .cursor-ring{width:36px;height:36px;border:1px solid rgba(23,20,15,.4);transition:width .35s var(--ease),height .35s var(--ease),background .35s var(--ease),border-color .35s}
 .cursor-ring.grow{width:66px;height:66px;background:rgba(176,132,79,.10);border-color:transparent}
@@ -339,8 +339,62 @@ header.away{transform:translateY(-110%)}
 footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--paper-2)}
 @media(max-width:940px){footer{position:static}body{padding-bottom:0!important}.site-wrap{box-shadow:none}}
 
+/* ===== KUAFÖR ZANAAT KATMANI ===== */
+/* makas imleç */
+.cursor-scis{position:fixed;top:-100px;left:-100px;z-index:9999;pointer-events:none;width:34px;height:34px;margin:-17px 0 0 -17px;transform:rotate(-18deg)}
+.cursor-scis svg{width:100%;height:100%;overflow:visible;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.cursor-scis .pivot{fill:var(--ink);stroke:none}
+.cursor-scis .bA,.cursor-scis .bB{transform-origin:22px 22px;transition:transform .3s var(--ease)}
+.cursor-scis .bA{transform:rotate(6deg)}
+.cursor-scis .bB{transform:rotate(-6deg)}
+.cursor-scis.open .bA{transform:rotate(15deg)}
+.cursor-scis.open .bB{transform:rotate(-15deg)}
+.cursor-scis.snip .bA{animation:snipA .24s var(--ease)}
+.cursor-scis.snip .bB{animation:snipB .24s var(--ease)}
+@keyframes snipA{45%{transform:rotate(-1deg)}100%{transform:rotate(6deg)}}
+@keyframes snipB{45%{transform:rotate(1deg)}100%{transform:rotate(-6deg)}}
+@media (hover:none){.cursor-scis,#trail{display:none}}
+
+/* saç teli imleç izi */
+#trail{position:fixed;inset:0;z-index:9996;pointer-events:none}
+
+/* yükleme: saç telini kesen makas */
+.loader .bar{overflow:visible;position:relative}
+.loader .lscis{position:absolute;top:50%;left:0;width:22px;height:22px;transform:translate(-50%,-50%);transition:left .13s linear}
+.loader .lscis svg{width:100%;height:100%;overflow:visible;fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round}
+
+/* hero: zanaat aletleri (çizgisel) */
+.tool{position:absolute;fill:none;stroke:var(--ink-soft);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;opacity:.14;pointer-events:none}
+.tool.t-comb{top:19%;left:7%;width:clamp(56px,7vw,108px);rotate:-14deg}
+.tool.t-spray{top:57%;right:6.5%;width:clamp(34px,4vw,58px);rotate:10deg}
+.tool.t-scis{bottom:16%;left:15%;width:clamp(44px,5vw,78px);rotate:24deg}
+.tool .pivot{fill:var(--ink-soft);stroke:none}
+
+/* kaydırma işareti: kesim çizgisi + inen makas */
+.scroll-cue i{background:none;border-left:1px dashed rgba(23,20,15,.35);overflow:visible}
+.scroll-cue i::after{display:none}
+.scroll-cue .cutter{position:absolute;left:0;top:0;width:15px;height:15px;transform:translate(-46%,-50%) rotate(90deg);animation:cuttravel 2.6s var(--ease) infinite}
+.scroll-cue .cutter svg{width:100%;height:100%;overflow:visible;fill:none;stroke:var(--ink-soft);stroke-width:2.6;stroke-linecap:round}
+@keyframes cuttravel{0%{top:-6%;opacity:0}18%{opacity:1}82%{opacity:1}100%{top:104%;opacity:0}}
+
+/* hizmet kategorisi ikonları */
+.cicon{width:25px;height:25px;flex:none;color:var(--muted);transition:color .5s,transform .6s var(--ease);align-self:center}
+.cicon svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cicon .pivot{fill:currentColor;stroke:none}
+.cat-head:hover .cicon{transform:rotate(-10deg)}
+.cat.open .cicon{color:var(--accent);transform:rotate(-8deg) scale(1.08)}
+.cat-head .t{align-items:center}
+
+/* koyu bant: tarak dişi kenarlar */
+.sig-dark{position:relative}
+.sig-dark::before,.sig-dark::after{content:"";position:absolute;left:0;right:0;height:9px;background:repeating-linear-gradient(90deg,var(--paper) 0 5px,transparent 5px 14px)}
+.sig-dark::before{top:0}
+.sig-dark::after{bottom:0;background:repeating-linear-gradient(90deg,var(--paper-2) 0 5px,transparent 5px 14px)}
+
 /* hareket azaltma tercihi */
 @media (prefers-reduced-motion:reduce){
+  .scroll-cue .cutter{animation:none;opacity:0}
+  .cursor-scis .bA,.cursor-scis .bB{transition:none}
   html{scroll-behavior:auto}
   .marquee .track{animation:none!important;transform:none!important}
   .orbit svg{animation:none}
@@ -354,13 +408,14 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 </head>
 <body>
 
-<div class="cursor-dot"></div>
+<canvas id="trail"></canvas>
+<div class="cursor-scis" id="cursorScis"><svg viewBox="0 0 44 44"><g class="bA"><line x1="22" y1="22" x2="40" y2="7"/><line x1="22" y1="22" x2="12" y2="30.5"/><circle cx="8.6" cy="33.4" r="4.2"/></g><g class="bB"><line x1="22" y1="22" x2="40" y2="37"/><line x1="22" y1="22" x2="12" y2="13.5"/><circle cx="8.6" cy="10.6" r="4.2"/></g><circle class="pivot" cx="22" cy="22" r="1.6"/></svg></div>
 <div class="cursor-ring"><b id="curLabel"></b></div>
 <div class="progress" id="progress"></div>
 
 <div class="loader" id="loader">
   <div class="wordmark">NİŞANTAŞI<small>KUAFÖR</small></div>
-  <div class="bar"><i id="loadBar"></i></div>
+  <div class="bar"><i id="loadBar"></i><span class="lscis" id="loadScis"><svg viewBox="0 0 44 44"><g class="bA"><line x1="22" y1="22" x2="40" y2="9"/><line x1="22" y1="22" x2="12" y2="29.5"/><circle cx="9" cy="32.6" r="4"/></g><g class="bB"><line x1="22" y1="22" x2="40" y2="35"/><line x1="22" y1="22" x2="12" y2="14.5"/><circle cx="9" cy="11.4" r="4"/></g></svg></span></div>
   <div class="pct" id="loadPct">00</div>
 </div>
 
@@ -393,6 +448,9 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <!-- HERO — sadece tipografi -->
 <section class="hero" id="hero">
   <span class="orn o1">✦</span><span class="orn o2">✦</span><span class="orn o3">✦</span><span class="orn o4">✦</span>
+  <svg class="tool t-comb" data-k="14" viewBox="0 0 64 26"><path d="M3 5 H61 M7 5 V21 M13.5 5 V21 M20 5 V21 M26.5 5 V21 M33 5 V21 M39.5 5 V21 M46 5 V21 M52.5 5 V21 M59 5 V21"/></svg>
+  <svg class="tool t-spray" data-k="22" viewBox="0 0 40 58"><path d="M10 24 h20 v26 a4 4 0 0 1 -4 4 h-12 a4 4 0 0 1 -4 -4 Z M14 24 v-6 h8 v6 M14 18 v-5 h12 M26 13 h5 M34 9 l4 -3 M35 13 h5 M34 17 l4 3"/></svg>
+  <svg class="tool t-scis" data-k="18" viewBox="0 0 44 44"><g><line x1="22" y1="22" x2="40" y2="7"/><line x1="22" y1="22" x2="12" y2="30.5"/><circle cx="8.6" cy="33.4" r="4.2"/></g><g><line x1="22" y1="22" x2="40" y2="37"/><line x1="22" y1="22" x2="12" y2="13.5"/><circle cx="8.6" cy="10.6" r="4.2"/></g><circle class="pivot" cx="22" cy="22" r="1.6"/></svg>
   <div class="kick"><span class="eyebrow">Mersin · Since 2018</span><span class="status" id="statusChip" style="display:none"><i></i><span id="statusTxt">—</span></span></div>
   <h1 id="heroTitle"><span class="word">NİŞANTAŞI</span></h1>
   <div class="kuafor">Kuaför</div>
@@ -401,7 +459,7 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
     <span>Saç Tasarım Stüdyosu</span>
     <span>Pazar günleri <b>açığız</b></span>
   </div>
-  <div class="scroll-cue"><span>Keşfet</span><i></i></div>
+  <div class="scroll-cue"><span>Keşfet</span><i><span class="cutter"><svg viewBox="0 0 44 44"><g><line x1="22" y1="22" x2="40" y2="9"/><line x1="22" y1="22" x2="12" y2="29.5"/><circle cx="9" cy="32.6" r="4"/></g><g><line x1="22" y1="22" x2="40" y2="35"/><line x1="22" y1="22" x2="12" y2="14.5"/><circle cx="9" cy="11.4" r="4"/></g></svg></span></i></div>
   <div class="orbit">
     <svg viewBox="0 0 100 100"><defs><path id="orbitPath" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs><text><textPath href="#orbitPath">Hair Design Studio · Since 2018 · Mersin&#160;·&#160;</textPath></text></svg>
     <span class="core">✦</span>
@@ -411,8 +469,8 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <!-- MARQUEE -->
 <div class="marquee">
   <div class="track">
-    <span>Balyaj <b class="dot">✦</b> FreeLights <b class="dot">✦</b> Saç Tasarımı <b class="dot">✦</b> Renk <b class="dot">✦</b> Make-Up <b class="dot">✦</b> Gelin Saçı <b class="dot">✦</b> Bakım <b class="dot">✦</b>&nbsp;</span>
-    <span>Balyaj <b class="dot">✦</b> FreeLights <b class="dot">✦</b> Saç Tasarımı <b class="dot">✦</b> Renk <b class="dot">✦</b> Make-Up <b class="dot">✦</b> Gelin Saçı <b class="dot">✦</b> Bakım <b class="dot">✦</b>&nbsp;</span>
+    <span>Balyaj <b class="dot">✂</b> FreeLights <b class="dot">✦</b> Saç Tasarımı <b class="dot">✂</b> Renk <b class="dot">✦</b> Make-Up <b class="dot">✂</b> Gelin Saçı <b class="dot">✦</b> Bakım <b class="dot">✂</b>&nbsp;</span>
+    <span>Balyaj <b class="dot">✂</b> FreeLights <b class="dot">✦</b> Saç Tasarımı <b class="dot">✂</b> Renk <b class="dot">✦</b> Make-Up <b class="dot">✂</b> Gelin Saçı <b class="dot">✦</b> Bakım <b class="dot">✂</b>&nbsp;</span>
   </div>
 </div>
 
@@ -719,7 +777,8 @@ var MENU = [
   var bar=document.getElementById('loadBar'),pct=document.getElementById('loadPct'),loader=document.getElementById('loader');
   var p=0;var t=setInterval(function(){p+=Math.random()*16;if(p>=100){p=100;clearInterval(t);
     setTimeout(function(){loader.classList.add('done');document.getElementById('hero').classList.add('on');},450);}
-    bar.style.transform='scaleX('+(p/100)+')';pct.textContent=String(Math.floor(p)).padStart(2,'0');},130);
+    bar.style.transform='scaleX('+(p/100)+')';pct.textContent=String(Math.floor(p)).padStart(2,'0');
+    var ls=document.getElementById('loadScis');if(ls)ls.style.left=p+'%';},130);
 })();
 
 /* ================= HERO harf animasyonu ================= */
@@ -737,15 +796,19 @@ var MENU = [
 
 /* ================= CURSOR ================= */
 (function(){
-  var dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
-  if(!dot)return;var rx=0,ry=0,x=0,y=0;
-  window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;dot.style.left=x+'px';dot.style.top=y+'px';});
+  var scis=document.getElementById('cursorScis'),ring=document.querySelector('.cursor-ring');
+  if(!scis)return;var rx=0,ry=0,x=0,y=0;
+  window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;scis.style.left=x+'px';scis.style.top=y+'px';});
   (function loop(){rx+=(x-rx)*.16;ry+=(y-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.addEventListener('mousedown',function(){
+    scis.classList.remove('snip');void scis.offsetWidth;scis.classList.add('snip');
+  });
+  scis.addEventListener('animationend',function(){scis.classList.remove('snip')});
   function bind(){
     document.querySelectorAll('a,button,.svc,.prod,.member,.cat-head').forEach(function(el){
       if(el._c)return;el._c=1;
-      el.addEventListener('mouseenter',function(){ring.classList.add('grow')});
-      el.addEventListener('mouseleave',function(){ring.classList.remove('grow')});
+      el.addEventListener('mouseenter',function(){ring.classList.add('grow');scis.classList.add('open')});
+      el.addEventListener('mouseleave',function(){ring.classList.remove('grow');scis.classList.remove('open')});
     });
   }
   window._bindCursor=bind;bind();
@@ -759,6 +822,12 @@ burger.addEventListener('click',function(){burger.classList.toggle('open');mnav.
 mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){burger.classList.remove('open');mnav.classList.remove('open');});});
 
 /* ================= HİZMET MENÜSÜ ================= */
+var CAT_ICONS=[
+  '<svg viewBox="0 0 44 44"><g><line x1="22" y1="22" x2="40" y2="7"/><line x1="22" y1="22" x2="12" y2="30.5"/><circle cx="8.6" cy="33.4" r="4.2"/></g><g><line x1="22" y1="22" x2="40" y2="37"/><line x1="22" y1="22" x2="12" y2="13.5"/><circle cx="8.6" cy="10.6" r="4.2"/></g><circle class="pivot" cx="22" cy="22" r="1.6"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 3C12 3 5.5 11 5.5 15.2a6.5 6.5 0 0 0 13 0C18.5 11 12 3 12 3Z"/></svg>',
+  '<svg viewBox="0 0 26 30"><path d="M9 12 h8 v13 a3.4 3.4 0 0 1 -3.4 3.4 h-1.2 A3.4 3.4 0 0 1 9 25 Z M10.4 12 V7.4 h5.2 V12 M11.6 7.4 V4 h2.8 v3.4"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M4.5 19.5 12 12 M12.8 11.2 l5.4 -5.4 a2 2 0 0 0 -2.8 -2.8 l-5.4 5.4 M9.2 9.2 l5.6 5.6"/></svg>'
+];
 (function(){
   var wrap=document.getElementById('catList');
   MENU.forEach(function(c,ci){
@@ -770,7 +839,7 @@ mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',functi
         +'<span class="price">'+it[1]+'</span><span class="go">Randevu →</span></a>';
     });
     cat.innerHTML='<button class="cat-head" type="button">'
-      +'<span class="t"><span class="idx">0'+(ci+1)+'</span><h3>'+c.cat+'</h3></span>'
+      +'<span class="t"><span class="idx">0'+(ci+1)+'</span><span class="cicon">'+(CAT_ICONS[ci]||'')+'</span><h3>'+c.cat+'</h3></span>'
       +'<span style="display:flex;align-items:center;gap:20px"><span class="cnt">'+c.items.length+' hizmet</span><span class="pm"></span></span>'
       +'</button><div class="cat-body"><div>'+rows+'</div></div>';
     cat.querySelector('.cat-head').addEventListener('click',function(){cat.classList.toggle('open');});
@@ -960,6 +1029,41 @@ var TOUCH=window.matchMedia&&matchMedia('(hover: none)').matches;
     document.body.style.paddingBottom=f.offsetHeight+'px';
   }
   fit();window.addEventListener('resize',fit);setTimeout(fit,900);
+})();
+
+/* saç teli imleç izi */
+(function(){
+  if(RM||TOUCH)return;
+  var cv=document.getElementById('trail');if(!cv)return;
+  var ctx=cv.getContext('2d');var dpr=Math.min(2,window.devicePixelRatio||1);
+  function size(){cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+  size();window.addEventListener('resize',size);
+  var N=24,pts=[],mx=innerWidth/2,my=innerHeight/2,seen=false;
+  for(var i=0;i<N;i++)pts.push({x:mx,y:my});
+  window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!seen){seen=true;pts.forEach(function(p){p.x=mx;p.y=my});}});
+  (function loop(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    if(seen){
+      pts[0].x+=(mx-pts[0].x)*.32;pts[0].y+=(my-pts[0].y)*.32;
+      for(var i=1;i<N;i++){pts[i].x+=(pts[i-1].x-pts[i].x)*.32;pts[i].y+=(pts[i-1].y-pts[i].y)*.32;}
+      ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+      for(var j=1;j<N-1;j++){var xc=(pts[j].x+pts[j+1].x)/2,yc=(pts[j].y+pts[j+1].y)/2;ctx.quadraticCurveTo(pts[j].x,pts[j].y,xc,yc);}
+      ctx.strokeStyle='rgba(176,132,79,.5)';ctx.lineWidth=1;ctx.lineCap='round';ctx.stroke();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* hero aletleri: fare paralaksı */
+(function(){
+  if(RM||TOUCH)return;
+  var hero=document.getElementById('hero');var tools=document.querySelectorAll('.tool');
+  if(!hero||!tools.length)return;
+  hero.addEventListener('mousemove',function(e){
+    var nx=e.clientX/innerWidth-.5,ny=e.clientY/innerHeight-.5;
+    tools.forEach(function(t){var k=+t.getAttribute('data-k')||12;t.style.translate=(nx*k)+'px '+(ny*k)+'px';});
+  });
+  hero.addEventListener('mouseleave',function(){tools.forEach(function(t){t.style.translate='0px 0px'});});
 })();
 
 /* canlı açık/kapalı durumu (Salı kapalı · Pazar 10–16 · diğer günler 09–20) */
