@@ -368,7 +368,9 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 .cart-btn.bump{animation:cbump .4s var(--ease)}
 @keyframes cbump{0%,100%{transform:none}40%{transform:translateY(-3px)}}
 @media(max-width:940px){
-  .nav-r{padding-right:44px}
+  header a.wordmark{grid-column:2;grid-row:1}
+  .nav-r{grid-column:3;grid-row:1;justify-self:end;padding-right:44px}
+  .burger{grid-row:1}
   header .wordmark{font-size:14px;letter-spacing:.34em;text-indent:.34em}
   header .wordmark small{font-size:7.5px;letter-spacing:.3em;text-indent:.3em;margin-top:4px}
 }
