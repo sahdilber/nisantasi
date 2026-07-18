@@ -610,7 +610,7 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
       <span class="eyebrow reveal">Yorumlar</span>
       <h2 class="reveal reveal-d1" style="margin-top:20px">Misafirlerimiz <em>anlatıyor</em>.</h2>
     </div>
-    <p class="note reveal reveal-d1">Randevu sonrası KolayRandevu üzerinden bırakılan doğrulanmış misafir yorumları. Her ziyaretinizde farklı yorumlar görürsünüz.</p>
+    <p class="note reveal reveal-d1">Randevu sonrası KolayRandevu üzerinden bırakılan doğrulanmış misafir yorumları.</p>
   </div>
   <div class="rev-sum reveal">
     <span class="big">4,6</span>
@@ -643,7 +643,7 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
     <div class="book-side reveal reveal-d1">
       <span class="eyebrow">Çalışma Saatleri &amp; Adres</span>
       <div class="hours">
-        <div class="r"><span>Pazartesi, Çarşamba — Cumartesi</span><span>09:00 – 20:00</span></div>
+        <div class="r"><span>Pazartesi, Çarşamba — Cumartesi</span><span>10:30 – 19:00</span></div>
         <div class="r hl"><span>Pazar</span><span>10:00 – 16:00 ✦</span></div>
         <div class="r"><span>Salı</span><span>Kapalı</span></div>
         <div class="r"><span>Telefon</span><span><a href="tel:+905301332701">0530 133 27 01</a></span></div>
@@ -1284,7 +1284,7 @@ var TOUCH=window.matchMedia&&matchMedia('(hover: none)').matches;
   hero.addEventListener('mouseleave',function(){tools.forEach(function(t){t.style.translate='0px 0px'});});
 })();
 
-/* canlı açık/kapalı durumu (Salı kapalı · Pazar 10–16 · diğer günler 09–20) */
+/* canlı açık/kapalı durumu (Salı kapalı · Pazar 10–16 · diğer günler 10:30–19) */
 (function(){
   var chip=document.getElementById('statusChip'),txt=document.getElementById('statusTxt');if(!chip)return;
   try{
@@ -1292,7 +1292,7 @@ var TOUCH=window.matchMedia&&matchMedia('(hover: none)').matches;
     var day=now.getDay(),h=now.getHours()+now.getMinutes()/60,open;
     if(day===2)open=false;
     else if(day===0)open=(h>=10&&h<16);
-    else open=(h>=9&&h<20);
+    else open=(h>=10.5&&h<19);
     txt.textContent=open?'Şu an açığız':(day===2?'Bugün kapalıyız':'Şu an kapalıyız');
     chip.classList.toggle('closed',!open);
     chip.style.display='inline-flex';
