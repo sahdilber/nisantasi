@@ -196,7 +196,6 @@ section{padding:clamp(80px,12vh,150px) clamp(18px,4vw,54px);position:relative}
 
 /* ===== PRODUCTS — minimalist list ===== */
 .shop{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.prod-list{border-top:1px solid var(--line)}
 .prod{display:grid;grid-template-columns:56px 1.2fr 1fr auto;gap:22px;align-items:baseline;padding:24px 8px;border-bottom:1px solid var(--line);position:relative;transition:padding .5s var(--ease)}
 .prod::before{content:"";position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,rgba(176,132,79,.08),transparent);transition:width .6s var(--ease)}
 .prod:hover::before{width:100%}
@@ -208,7 +207,9 @@ section{padding:clamp(80px,12vh,150px) clamp(18px,4vw,54px);position:relative}
 .prod .brand{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
 .prod .ptype{font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em}
 .prod .price{font-family:var(--serif);font-size:clamp(18px,2.1vw,26px);white-space:nowrap;text-align:right}
-.prod .price .old{color:var(--muted);text-decoration:line-through;font-size:.62em;margin-left:8px}
+.prod .price .old{color:var(--ink-soft);opacity:.8;text-decoration:line-through;font-size:.74em;margin-left:9px;white-space:nowrap}
+.pcat .cat-head h3{font-size:clamp(21px,2.8vw,36px)}
+.pcat .prod{border-bottom:none;border-top:1px solid var(--line)}
 .prod .pdesc{display:block;max-height:0;opacity:0;overflow:hidden;font-size:12.5px;line-height:1.7;color:var(--ink-soft);max-width:480px;margin-top:0;transform:translateY(6px);transition:max-height .6s var(--ease),opacity .5s var(--ease),margin .5s var(--ease),transform .5s var(--ease)}
 @media(hover:hover){.prod:hover .pdesc{max-height:140px;opacity:1;margin-top:10px;transform:none}}
 .prod-cat{display:flex;align-items:center;gap:16px;padding:44px 8px 14px}
@@ -216,7 +217,7 @@ section{padding:clamp(80px,12vh,150px) clamp(18px,4vw,54px);position:relative}
 .prod-cat .t{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
 .prod-cat .ln{flex:1;height:1px;background:var(--line)}
 .prod-cat .c{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-@media(max-width:720px){.prod{grid-template-columns:1fr auto;gap:8px}.prod .idx,.prod .ptype{display:none}.prod .price .old{display:block;margin:2px 0 0;font-size:.6em}}
+@media(max-width:720px){.prod{grid-template-columns:1fr auto;gap:8px}.prod .idx,.prod .ptype{display:none}.prod .price .old{display:block;margin:3px 0 0;font-size:.72em}}
 
 /* ===== TEAM ===== */
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
@@ -940,21 +941,26 @@ var CAT_ICONS=[
 (function(){
   var wrap=document.getElementById('prodList');if(!wrap)return;
   var idx=0;
-  PRODUCTS.forEach(function(g){
-    var head=document.createElement('div');head.className='prod-cat reveal';
-    head.innerHTML='<span class="t">'+g.cat+'</span><span class="ln"></span><span class="c">'+g.items.length+' ürün</span>';
-    wrap.appendChild(head);
-    g.items.forEach(function(p,i){
+  PRODUCTS.forEach(function(g,gi){
+    var cat=document.createElement('div');
+    cat.className='cat pcat reveal'+(gi===0?' open':'');
+    var rows='';
+    g.items.forEach(function(p){
       idx++;
-      var row=document.createElement('div');
-      row.className='prod reveal'+(i%3?' reveal-d'+(i%3):'');
-      row.innerHTML='<span class="idx">'+('0'+idx).slice(-2)+'</span>'
+      rows+='<div class="prod">'
+        +'<span class="idx">'+('0'+idx).slice(-2)+'</span>'
         +'<div><span class="brand">'+p[0]+'</span><span class="name">'+p[1]+'</span><span class="pdesc">'+p[5]+'</span></div>'
         +'<span class="ptype">'+p[2]+'</span>'
         +'<span class="price">'+p[3]+'<span class="old">'+p[4]+'</span></span>'
-        +'<button class="padd" type="button" data-n="'+p[1]+'" data-b="'+p[0]+'" data-p="'+parseInt(p[3].replace(/\D/g,''),10)+'" data-o="'+parseInt(p[4].replace(/\D/g,''),10)+'">Sepete Ekle +</button>';
-      wrap.appendChild(row);
+        +'<button class="padd" type="button" data-n="'+p[1]+'" data-b="'+p[0]+'" data-p="'+parseInt(p[3].replace(/\D/g,''),10)+'" data-o="'+parseInt(p[4].replace(/\D/g,''),10)+'">Sepete Ekle +</button>'
+        +'</div>';
     });
+    cat.innerHTML='<button class="cat-head" type="button">'
+      +'<span class="t"><span class="idx">'+('0'+(gi+1)).slice(-2)+'</span><h3>'+g.cat+'</h3></span>'
+      +'<span style="display:flex;align-items:center;gap:20px"><span class="cnt">'+g.items.length+' ürün</span><span class="pm"></span></span>'
+      +'</button><div class="cat-body"><div>'+rows+'</div></div>';
+    cat.querySelector('.cat-head').addEventListener('click',function(){cat.classList.toggle('open')});
+    wrap.appendChild(cat);
   });
 })();
 
