@@ -365,7 +365,9 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 /* ===== SEPET & ÖDEME ===== */
 .cart-btn{position:relative;width:42px;height:42px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:50%;color:var(--ink);cursor:none;transition:background .4s,color .4s,border-color .4s,transform .5s var(--ease)}
 .cart-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
-.cart-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cart-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cart-btn .star{fill:var(--accent);stroke:none;transition:fill .4s}
+.cart-btn:hover .star{fill:var(--paper)}
 .cart-btn .cnt{position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;border-radius:10px;background:var(--accent);color:var(--paper);font-size:9.5px;font-family:var(--sans);display:flex;align-items:center;justify-content:center;padding:0 4px;transform:scale(0);transition:transform .35s var(--ease)}
 .cart-btn.has .cnt{transform:scale(1)}
 .cart-btn.bump{animation:cbump .4s var(--ease)}
@@ -477,7 +479,7 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
     <a href="#ekip" class="lnk">Ekip</a>
     <a href="#yorumlar" class="lnk">Yorumlar</a>
     <a href="https://www.kolayrandevu.com/reserve.php?salon=83792&amp;greserve=1&amp;utm_source=google&amp;utm_medium=reserve_with_google&amp;utm_content=action_url&amp;rwg_token=AE37R_gm430iYFOPQTcPUqKC_ukrrk_4SPtK-JW-sKgx8Wd3HccY3JXRKwoGhBhDsCqLMIChuDoWkWkm35Vd_MlCwoAmWV3MXQ%3D%3D" target="_blank" rel="noopener" class="lnk nav-cta">Randevu Al</a>
-    <button class="cart-btn" id="cartBtn" aria-label="Sepeti aç"><svg viewBox="0 0 24 24"><path d="M6 8 h12 l-1.2 12 a2 2 0 0 1 -2 1.8 h-5.6 a2 2 0 0 1 -2 -1.8 Z M9 8 V6.4 a3 3 0 0 1 6 0 V8"/></svg><span class="cnt" id="cartCnt">0</span></button>
+    <button class="cart-btn" id="cartBtn" aria-label="Sepeti aç"><svg viewBox="0 0 24 24"><path d="M6 9 H18 V18.2 A2.8 2.8 0 0 1 15.2 21 H8.8 A2.8 2.8 0 0 1 6 18.2 Z"/><path d="M9.3 9 V7.5 A2.7 2.7 0 0 1 14.7 7.5 V9"/><path class="star" fill="currentColor" stroke="none" d="M12 12.7l.66 1.64 1.64.66-1.64.66L12 17.3l-.66-1.64-1.64-.66 1.64-.66Z"/></svg><span class="cnt" id="cartCnt">0</span></button>
   </div>
   <div class="burger" id="burger"><span></span><span></span><span></span></div>
 </header>
