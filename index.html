@@ -465,7 +465,6 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <div class="loader" id="loader">
   <div class="wordmark">NİŞANTAŞI<small>KUAFÖR</small></div>
   <div class="bar"><i id="loadBar"></i></div>
-  <div class="pct" id="loadPct">00</div>
 </div>
 
 <header id="header">
@@ -869,10 +868,10 @@ var MENU = [
 
 /* ================= PRELOADER ================= */
 (function(){
-  var bar=document.getElementById('loadBar'),pct=document.getElementById('loadPct'),loader=document.getElementById('loader');
+  var bar=document.getElementById('loadBar'),loader=document.getElementById('loader');
   var p=0;var t=setInterval(function(){p+=Math.random()*16;if(p>=100){p=100;clearInterval(t);
     setTimeout(function(){loader.classList.add('done');document.getElementById('hero').classList.add('on');},450);}
-    bar.style.transform='scaleX('+(p/100)+')';pct.textContent=String(Math.floor(p)).padStart(2,'0');},130);
+    bar.style.transform='scaleX('+(p/100)+')';},130);
 })();
 
 /* ================= HERO harf animasyonu ================= */
