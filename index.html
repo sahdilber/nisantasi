@@ -44,13 +44,15 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 .wordmark{font-family:var(--sans);font-weight:300;line-height:1;text-align:center;letter-spacing:.5em;text-indent:.5em;font-size:19px}
 .wordmark small{display:block;font-size:8.5px;letter-spacing:.42em;text-indent:.42em;color:var(--muted);margin-top:6px;font-weight:400}
 
-/* preloader */
-.loader{position:fixed;inset:0;z-index:10000;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s var(--ease),visibility .8s}
-.loader.done{opacity:0;visibility:hidden}
-.loader .wordmark{font-size:clamp(20px,3vw,30px)}
-.loader .bar{width:min(240px,55vw);height:1px;background:rgba(23,20,15,.12);overflow:hidden}
-.loader .bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
-.loader .pct{font-size:10px;letter-spacing:.4em;color:var(--muted)}
+/* preloader — mürekkep dolgulu marka */
+.loader{position:fixed;inset:0;z-index:10000;background:var(--paper);display:flex;align-items:center;justify-content:center;transition:transform 1.05s var(--ease),visibility 1.05s;will-change:transform}
+.loader.done{transform:translateY(-101%);visibility:hidden}
+.l-mark{text-align:center;transition:opacity .45s,transform .6s var(--ease)}
+.loader.done .l-mark{opacity:0;transform:translateY(-20px)}
+.l-word{position:relative;display:inline-block;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(46px,9vw,96px);line-height:1.1;letter-spacing:.01em;color:rgba(23,20,15,.12);padding:0 .08em}
+.l-word b{position:absolute;inset:0;padding:0 .08em;font-weight:300;color:var(--ink);clip-path:inset(-5% 100% -5% 0);transition:clip-path .4s var(--ease);white-space:nowrap}
+.l-word b em{font-style:italic;color:var(--accent)}
+.l-sub{display:block;margin-top:20px;font-size:9.5px;letter-spacing:.52em;text-indent:.52em;text-transform:uppercase;color:var(--muted);font-family:var(--sans)}
 
 /* nav */
 header{position:fixed;top:0;left:0;width:100%;z-index:900;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:24px clamp(18px,4vw,54px);transition:padding .5s var(--ease),background .5s var(--ease),border-color .5s}
@@ -463,8 +465,10 @@ footer{position:fixed;left:0;bottom:0;width:100%;z-index:1;background:var(--pape
 <div class="progress" id="progress"></div>
 
 <div class="loader" id="loader">
-  <div class="wordmark">NİŞANTAŞI<small>KUAFÖR</small></div>
-  <div class="bar"><i id="loadBar"></i></div>
+  <div class="l-mark">
+    <span class="l-word">Nişantaşı<b id="loadFill" aria-hidden="true">Ni<em>ş</em>antaşı</b></span>
+    <span class="l-sub">Kuaför · Mersin</span>
+  </div>
 </div>
 
 <header id="header">
@@ -868,10 +872,10 @@ var MENU = [
 
 /* ================= PRELOADER ================= */
 (function(){
-  var bar=document.getElementById('loadBar'),loader=document.getElementById('loader');
+  var fill=document.getElementById('loadFill'),loader=document.getElementById('loader');
   var p=0;var t=setInterval(function(){p+=Math.random()*16;if(p>=100){p=100;clearInterval(t);
-    setTimeout(function(){loader.classList.add('done');document.getElementById('hero').classList.add('on');},450);}
-    bar.style.transform='scaleX('+(p/100)+')';},130);
+    setTimeout(function(){loader.classList.add('done');document.getElementById('hero').classList.add('on');},520);}
+    fill.style.clipPath='inset(-5% '+(100-p)+'% -5% 0)';},130);
 })();
 
 /* ================= HERO harf animasyonu ================= */
